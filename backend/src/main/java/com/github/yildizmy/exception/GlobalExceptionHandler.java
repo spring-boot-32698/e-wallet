@@ -93,7 +93,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return ResponseEntity<Object> with detailed information related to the error
      */
     @ExceptionHandler(InsufficientFundsException.class)
-    @ResponseStatus(HttpStatus.PRECONDITION_FAILED )
+    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
     public ResponseEntity<Object> handleInsufficientFundsException(InsufficientFundsException ex, WebRequest request) {
         log.error(METHOD_ARGUMENT_NOT_VALID, ex);
         return buildErrorResponse(ex, HttpStatus.PRECONDITION_FAILED, request);
@@ -137,8 +137,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleAllUncaughtException(Exception ex, WebRequest request) {
-        log.error(UNKNOWN_ERROR, ex);
-        return buildErrorResponse(ex, UNKNOWN_ERROR, HttpStatus.INTERNAL_SERVER_ERROR, request);
+        log.error(ex.getMessage(), ex);
+        return buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     /**
